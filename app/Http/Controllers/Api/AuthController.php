@@ -39,6 +39,7 @@ class AuthController extends Controller
                 'success' => true,
                 'data' => $success,
                 'message' => 'User Register Successfully',
+                'status' =>200
             ];
 
             return response()->json($response,200);
@@ -54,14 +55,16 @@ class AuthController extends Controller
                 'success' => true,
                 'data' => $success,
                 'message' => 'User Login Successfully',
+                'status' => 200,
             ];
             return response()->json($response,200);
         }else{
             $response = [
                 'success' => false,
                 'message' => 'Unauthorized',
+                'status' => 400,
             ];
-            return response()->json($response,400);
+            return response()->json($response);
         }
 
     }
@@ -72,6 +75,7 @@ class AuthController extends Controller
                 $response = [
                     'success' => true,
                     'message' => 'User Logout Successfully ',
+                    'status' => 200,
                 ];
                 return response()->json($response,200);
 
