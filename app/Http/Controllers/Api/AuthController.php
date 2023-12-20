@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //use Illuminate\Validation\Validator;
 use App\Models\User;
+use Laravel\Sanctum\PersonalAccessToken;
 use Auth;
 use Validator;
 class AuthController extends Controller
@@ -14,17 +15,19 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(),[
            'name' => 'required',
            'email' => 'required|email',
-           'password' => 'required',
+           'password' => 'required|confirmed',
+           'password_confirmation' => 'required',
            'role' => 'required',
         ]);
 
         if($validator->fails()){
             $response = [
                 'success' => false,
-                'message' => $validator->errors()
+                'message' => $validator->errors(),
+                'status' =>201
             ];
 
-            return response()->json($response,400);
+            return response()->json($response,201);
         }
             $inputData = $request->all();
             $user = User::create($inputData);
@@ -60,6 +63,17 @@ class AuthController extends Controller
             ];
             return response()->json($response,400);
         }
+
+    }
+
+    public function logout(){
+                $user = Auth::user();
+                $user->tokens()->delete();
+                $response = [
+                    'success' => true,
+                    'message' => 'User Logout Successfully ',
+                ];
+                return response()->json($response,200);
 
     }
 
