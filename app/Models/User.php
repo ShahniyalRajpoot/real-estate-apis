@@ -42,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+
+    public function image(){
+        return $this->morphOne(Image::class,'imagable');
+    }
 }
