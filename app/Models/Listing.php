@@ -14,5 +14,8 @@ class Listing extends Model
         return $this->morphMany(Image::class,'imagable');
     }
 
+    public function single_image(){
+        return $this->morphOne(Image::class,'imagable');
+    }
 
 }

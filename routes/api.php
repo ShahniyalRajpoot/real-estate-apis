@@ -25,4 +25,10 @@ Route::post('login',[AuthController::class,'login']);
 
 Route::middleware('auth:sanctum')->group( function () {
 Route::get('logout',[AuthController::class,'logout']);
+Route::get('/user-data',[AuthController::class,'getUserData']);
+Route::get('/profile-setting',[AuthController::class,'profileSetting']);
+Route::post('/save-profile-setting',[AuthController::class,'saveProfileSetting']);
+Route::post('/do-feature',[AuthController::class,'doFeature']);
+Route::post('/view-listing-detail',[AuthController::class,'getListingDetails']);
+
 });
